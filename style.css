@@ -404,51 +404,68 @@ input{
 }
 @media screen and (max-width:768px){
 
-    .header{
+    .sidebar{
 
-        flex-direction:row;
-
-        justify-content:space-between;
-
+        width:70px !important;
         padding:10px;
     }
 
-    .header h1{
+    .sidebar h2{
 
-        font-size:18px;
-
-        margin:0;
+        font-size:16px;
     }
 
-    #clock{
+    .sidebar a{
 
-        font-size:14px;
-    }
-
-    .header-controls button{
-
-        padding:8px;
-    }
-}
-@media screen and (max-width:768px){
-
-    #clock{
-
-        display:none;
-    }
-}
-@media screen and (max-width:768px){
-
-    .sidebar{
-
-        width:70px;
+        font-size:12px;
+        display:block;
+        margin:15px 0;
     }
 
     .main-content{
 
-        margin-left:70px;
+        margin-left:70px !important;
+        width:calc(100% - 70px);
     }
-}
-body{
-    background:red !important;
+
+    header{
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+    }
+
+    #clock{
+
+        display:none !important;
+    }
+
+    .header-controls{
+
+        display:none !important;
+    }
+
+    h1{
+
+        font-size:24px;
+        text-align:center;
+    }
+
+    .dashboard{
+
+        display:grid !important;
+
+        grid-template-columns:
+        1fr !important;
+
+        gap:15px;
+    }
+
+    .card{
+
+        width:100% !important;
+        margin:0 auto;
+    }
+
 }
