@@ -325,3 +325,127 @@ input{
     transition:
     0.3s;
 }
+@media screen and (max-width: 768px){
+
+    .sidebar{
+
+        width: 70px;
+        padding: 10px;
+    }
+
+    .sidebar h2{
+
+        font-size: 16px;
+    }
+
+    .sidebar a{
+
+        font-size: 12px;
+        display: block;
+        margin: 15px 0;
+    }
+
+    .main-content{
+
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+
+    .header{
+
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .header h1{
+
+        font-size: 24px;
+    }
+
+    .header-controls{
+
+        margin-top: 10px;
+    }
+
+    .dashboard{
+
+        display: grid;
+
+        grid-template-columns:
+        1fr;
+
+        gap: 15px;
+    }
+
+    .card{
+
+        width: 100%;
+    }
+}
+.header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 20px;
+}
+
+.header-controls{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+@media screen and (max-width:768px){
+
+    .header{
+
+        flex-direction:row;
+
+        justify-content:space-between;
+
+        padding:10px;
+    }
+
+    .header h1{
+
+        font-size:18px;
+
+        margin:0;
+    }
+
+    #clock{
+
+        font-size:14px;
+    }
+
+    .header-controls button{
+
+        padding:8px;
+    }
+}
+@media screen and (max-width:768px){
+
+    #clock{
+
+        display:none;
+    }
+}
+@media screen and (max-width:768px){
+
+    .sidebar{
+
+        width:70px;
+    }
+
+    .main-content{
+
+        margin-left:70px;
+    }
+}
