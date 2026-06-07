@@ -122,9 +122,6 @@ header{
     margin-left: 220px;
 }
 
-.container{
-    margin-left: 240px;
-}
 .decision{
     font-size: 28px;
     font-weight: bold;
@@ -345,11 +342,7 @@ input{
         margin: 15px 0;
     }
 
-    .main-content{
 
-        margin-left: 70px;
-        width: calc(100% - 70px);
-    }
 
     .header{
 
@@ -422,12 +415,7 @@ input{
         margin:15px 0;
     }
 
-    .main-content{
-
-        margin-left:70px !important;
-        width:calc(100% - 70px);
-    }
-
+ 
     header{
 
         display:flex;
@@ -468,4 +456,79 @@ input{
         margin:0 auto;
     }
 
+}
+@media screen and (max-width:768px){
+
+    .sidebar{
+
+        width:70px !important;
+    }
+
+  
+
+    .sidebar h2{
+
+        font-size:16px;
+    }
+
+    .sidebar a{
+
+        font-size:12px;
+        padding:5px;
+    }
+
+    #clock{
+
+        display:none !important;
+    }
+
+    header{
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+    }
+
+}
+@media screen and (max-width:768px){
+
+    .sidebar{
+        width:70px !important;
+        padding:10px !important;
+    }
+
+    .container{
+
+        margin-left:80px !important;
+
+        width:calc(100% - 90px) !important;
+
+        grid-template-columns:
+        1fr !important;
+    }
+
+    .header{
+
+        margin-left:80px !important;
+
+        width:calc(100% - 90px) !important;
+
+        flex-direction:column;
+    }
+
+    #clock{
+        display:none !important;
+    }
+
+    .card{
+
+        width:100% !important;
+    }
+}
+.header{
+
+    margin-left:240px;
+
+    width:calc(100% - 240px);
 }

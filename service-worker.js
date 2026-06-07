@@ -2,7 +2,7 @@ const CACHE_NAME = "smart-irrigation-v1";
 
 const urlsToCache = [
     "./",
-    "./index.html",
+    "./dashboard.html",
     "./analytics.html",
     "./settings.html",
     "./style.css",
