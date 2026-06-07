@@ -1,0 +1,327 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7f6;
+}
+
+header{
+    background:#2e7d32;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    padding:20px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.card h2{
+    margin-bottom:10px;
+}
+
+.card p{
+    font-size:28px;
+    font-weight:bold;
+    color:#2e7d32;
+}
+
+.recommendation{
+    grid-column:span 2;
+}
+
+.controls{
+    grid-column:span 2;
+    text-align:center;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:first-child{
+    background:
+    linear-gradient(
+    135deg,
+    #4CAF50,
+    #2E7D32
+    );
+    color:white;
+}
+
+button:last-child{
+    background:
+    linear-gradient(
+    135deg,
+    #e53935,
+    #c62828
+    );
+    color:white;
+}
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:220px;
+    height:100vh;
+
+    background:#1b5e20;
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar h2{
+    color:white;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    color:white;
+    text-decoration:none;
+
+    margin:12px 0;
+
+    padding:10px;
+
+    border-radius:8px;
+}
+
+.sidebar a:hover{
+    background:#2e7d32;
+}
+
+/* Move content right */
+
+header{
+    margin-left: 220px;
+}
+
+.container{
+    margin-left: 240px;
+}
+.decision{
+    font-size: 28px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.recommendation small{
+    display:block;
+    color:#555;
+    font-size:14px;
+    line-height:1.5;
+}
+.chart-card{
+    grid-column: span 3;
+}
+
+.chart-card{
+
+    grid-column: span 2;
+
+    min-height: 400px;
+}
+
+select,
+input{
+
+    width:100%;
+
+    padding:10px;
+
+    margin-top:10px;
+
+    border:1px solid #ccc;
+
+    border-radius:8px;
+
+    font-size:16px;
+}
+#toast{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:linear-gradient(
+        135deg,
+        #4CAF50,
+        #2E7D32
+    );
+    color:white;
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:bold;
+    opacity:0;
+    transform:translateX(120px);
+    transition:all .4s ease;
+    z-index:99999;
+}
+
+#toast.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.dark-mode{
+
+    background:#121212;
+
+    color:white;
+}
+
+.dark-mode .card{
+
+    background:#1e1e1e;
+
+    color:white;
+}
+
+.dark-mode .sidebar{
+
+    background:#0d0d0d;
+}
+.dark-mode{
+
+    background:#121212;
+    color:white;
+}
+
+.dark-mode .card{
+
+    background:#1e1e1e;
+    color:white;
+}
+
+#clock{
+
+    font-size:24px;
+    font-weight:bold;
+    margin:10px;
+}
+.card{
+
+    opacity:0;
+
+    animation:
+    slideUp 0.8s ease forwards,
+    floatCard 4s ease-in-out infinite;
+
+    animation-delay:
+    0s,
+    0.8s;
+}
+
+@keyframes floatCard{
+
+    0%{
+        transform:
+        translateY(0px);
+    }
+
+    50%{
+        transform:
+        translateY(-8px);
+    }
+
+    100%{
+        transform:
+        translateY(0px);
+    }
+}
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(80px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+    }
+}
+#loader{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100vh;
+
+    background:white;
+
+    z-index:99999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+#loaderLogo{
+
+    width:120px;
+
+    animation:
+    bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+
+    0%,100%{
+        transform:
+        translateY(0);
+    }
+
+    50%{
+        transform:
+        translateY(-25px);
+    }
+}
+
+.card:hover{
+
+    transform:
+    scale(1.03);
+
+    transition:
+    0.3s;
+}

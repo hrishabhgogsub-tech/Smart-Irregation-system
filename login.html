@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart Irrigation Login</title>
+
+    <link
+        rel="stylesheet"
+        href="login.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h1>
+                🌱 Smart Irrigation
+            </h1>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email"
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+            <button
+                onclick="login()"
+            >
+                Login
+            </button>
+
+            <p>
+                Don't have an account?
+            </p>
+
+            <button
+                class="signup-btn"
+                onclick="showSignup()"
+            >
+                Sign Up
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="login.js"></script>
+    <div id="toast"></div>
+
+</body>
+
+</html>

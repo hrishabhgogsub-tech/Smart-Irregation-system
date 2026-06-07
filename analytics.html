@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics</title>
+</head>
+<body>
+    <h1>Analytics Page</h1>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>🌱 MENU</h2>
+
+    <a href="index.html">🏠 Dashboard</a>
+
+    <a href="analytics.html">📈 Analytics</a>
+
+    <a href="settings.html">⚙ Settings</a>
+
+</div>
+
+<header>
+    <h1>📈 Analytics Dashboard</h1>
+</header>
+
+<div class="container">
+
+    <div class="card chart-card">
+        <h2>📈 Soil Moisture Trend</h2>
+        <canvas id="moistureAnalyticsChart"></canvas>
+    </div>
+
+    <div class="card chart-card">
+        <h2>💧 Water Usage Trend</h2>
+        <canvas id="waterChart"></canvas>
+    </div>
+
+    <div class="card chart-card">
+        <h2>🤖 AI Decisions</h2>
+        <canvas id="decisionChart"></canvas>
+    </div>
+
+</div>
+
+<script src="analytics.js"></script>
+
+</body>
+</html>
