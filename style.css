@@ -2,6 +2,17 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
 
@@ -16,15 +27,7 @@ header{
     padding:20px;
 }
 
-.container{
-    width:90%;
-    margin:auto;
-    padding:20px;
 
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
 
 .card{
     background:white;
@@ -344,22 +347,9 @@ input{
 
 
 
-    .header{
+ 
 
-        flex-direction: column;
-        text-align: center;
-        padding: 10px;
-    }
-
-    .header h1{
-
-        font-size: 24px;
-    }
-
-    .header-controls{
-
-        margin-top: 10px;
-    }
+ 
 
     .dashboard{
 
@@ -384,207 +374,77 @@ input{
 
     align-items:center;
 
-    padding:15px 20px;
+    padding:15px;
+
+    margin-left:240px;
+
+    width:calc(100% - 240px);
+
+    background:#2e7d32;
 }
+.container{
 
-.header-controls{
+    width:calc(100% - 260px);
 
-    display:flex;
+    margin-left:240px;
 
-    align-items:center;
+    padding:20px;
 
-    gap:15px;
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
 }
 @media screen and (max-width:768px){
 
     .sidebar{
 
-        width:70px !important;
+        width:70px;
         padding:10px;
     }
 
-    .sidebar h2{
+    .header{
 
-        font-size:16px;
-    }
+        margin-left:70px;
+        width:calc(100% - 70px);
 
-    .sidebar a{
+        padding:10px;
 
-        font-size:12px;
-        display:block;
-        margin:15px 0;
-    }
-
- 
-    header{
-
-        display:flex;
         justify-content:center;
-        align-items:center;
-        flex-direction:column;
     }
 
-    #clock{
-
-        display:none !important;
-    }
-
-    .header-controls{
-
-        display:none !important;
-    }
-
-    h1{
+    .header h1{
 
         font-size:24px;
         text-align:center;
     }
 
-    .dashboard{
+    .header-controls{
 
-        display:grid !important;
-
-        grid-template-columns:
-        1fr !important;
-
-        gap:15px;
-    }
-
-    .card{
-
-        width:100% !important;
-        margin:0 auto;
-    }
-
-}
-@media screen and (max-width:768px){
-
-    .sidebar{
-
-        width:70px !important;
-    }
-
-  
-
-    .sidebar h2{
-
-        font-size:16px;
-    }
-
-    .sidebar a{
-
-        font-size:12px;
-        padding:5px;
+        display:none;
     }
 
     #clock{
 
-        display:none !important;
-    }
-
-    header{
-
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction:column;
-    }
-
-}
-@media screen and (max-width:768px){
-
-    .sidebar{
-        width:70px !important;
-        padding:10px !important;
+        display:none;
     }
 
     .container{
 
-        margin-left:80px !important;
+        margin-left:70px;
 
-        width:calc(100% - 90px) !important;
+        width:calc(100% - 70px);
 
-        grid-template-columns:
-        1fr !important;
-    }
+        padding:10px;
 
-    .header{
-
-        margin-left:80px !important;
-
-        width:calc(100% - 90px) !important;
-
-        flex-direction:column;
-    }
-
-    #clock{
-        display:none !important;
+        grid-template-columns:1fr;
     }
 
     .card{
 
-        width:100% !important;
-    }
-}
-.header{
-
-    margin-left:240px;
-
-    width:calc(100% - 240px);
-}
-@media screen and (max-width:768px){
-
-    .container{
-
-        margin-left:80px !important;
-
-        width:calc(100% - 90px) !important;
-
-        grid-template-columns:1fr !important;
+        width:100%;
     }
 
-}
-@media screen and (max-width:768px){
-
-    .header h1{
-
-        font-size:28px;
-        line-height:1.2;
-    }
-
-}
-.header{
-    padding:15px;
-}
-@media screen and (max-width:768px){
-
-    .sidebar{
-
-        width:60px !important;
-    }
-
-    .sidebar a{
-
-        font-size:0;
-    }
-
-    .sidebar a::first-letter{
-
-        font-size:22px;
-    }
-
-}
-.header-controls button{
-
-    width:45px;
-    height:45px;
-
-    border:none;
-    border-radius:50%;
-
-    background:#2e7d32;
-
-    color:white;
-
-    cursor:pointer;
 }
