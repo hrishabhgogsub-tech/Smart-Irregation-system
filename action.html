@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Actions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<div class="overlay" onclick="closeSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+    <h2>🌱 MENU</h2>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="action.html">🚿 Actions</a>
+    <a href="analytics.html">📈 Analytics</a>
+    <a href="settings.html">⚙ Settings</a>
+    <a href="info.html">ℹ Info</a>
+</div>
+
+<header class="header">
+    <h1>🚿 Irrigation Actions</h1>
+    <div class="header-controls">
+        <div id="clock"></div>
+        <button onclick="toggleTheme()">🌙</button>
+    </div>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>🤖 Auto Mode</h2>
+        <p id="autoMode">OFF</p>
+        <button class="action-btn stop-btn" onclick="toggleAutoMode()">🤖 Toggle Auto Mode</button>
+    </div>
+
+    <div class="card pump-status-card">
+        <h2>⚙ Pump Status</h2>
+        <p id="pumpStatus">OFF</p>
+        <button class="refresh-btn" onclick="showToast('✅ Status refreshed')">⚙ Refresh Status</button>
+    </div>
+
+    <div class="action-buttons">
+        <div class="card pump-action-card">
+            <div class="pump-action-icon start-icon">▶</div>
+            <h2>Start Pump</h2>
+            <div class="action-description">Manually start the irrigation pump</div>
+            <button class="action-btn start-btn" onclick="startPump()">▶ Start Pump</button>
+        </div>
+
+        <div class="card pump-action-card">
+            <div class="pump-action-icon stop-icon">■</div>
+            <h2>Stop Pump</h2>
+            <div class="action-description">Manually stop the irrigation pump</div>
+            <button class="action-btn stop-btn" onclick="stopPump()">■ Stop Pump</button>
+        </div>
+    </div>
+
+    <div class="card action-card">
+        <h2>📜 Irrigation History</h2>
+        <ul id="historyList"></ul>
+    </div>
+
+    <div class="card action-card">
+        <h2>🎤 Voice Assistant</h2>
+        <select id="voiceLanguage">
+            <option value="en-IN">English</option>
+            <option value="hi-IN">Hindi</option>
+        </select>
+        <button onclick="startVoiceRecognition()">Start Listening</button>
+        <button onclick="showVoices()">Show Voices</button>
+        <p id="voiceStatus">Waiting...</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="weather.js"></script>
+<script src="script.js"></script>
+<div id="toast"></div>
+</body>
+</html>

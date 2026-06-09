@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Info</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<div class="overlay" onclick="closeSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+    <h2>🌱 MENU</h2>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="action.html">🚿 Actions</a>
+    <a href="analytics.html">📈 Analytics</a>
+    <a href="settings.html">⚙ Settings</a>
+    <a href="info.html">ℹ Info</a>
+</div>
+
+<header class="header">
+    <h1>ℹ Project Info</h1>
+    <div class="header-controls">
+        <div id="clock"></div>
+        <button onclick="toggleTheme()">🌙</button>
+    </div>
+</header>
+
+<div class="container">
+    <div class="card action-card">
+        <h2>🌱 Smart Irrigation System</h2>
+        <div class="info-text">
+            <p>This project helps monitor soil moisture, weather, crop type, and irrigation decisions from one simple dashboard.</p>
+            <ul>
+                <li>Dashboard shows live-style sensor values and AI recommendations.</li>
+                <li>Actions page controls auto mode, pump start/stop, and irrigation history.</li>
+                <li>Analytics page shows moisture, water usage, and AI decision charts.</li>
+                <li>Settings page stores crop, threshold, location, and irrigation mode.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card action-card">
+        <h2>🎯 Project Aim</h2>
+        <div class="info-text">
+            <p>To reduce water wastage by suggesting irrigation only when soil moisture is low and rain probability is low.</p>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<div id="toast"></div>
+</body>
+</html>

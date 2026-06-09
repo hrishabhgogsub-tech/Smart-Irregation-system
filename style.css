@@ -284,19 +284,69 @@ select,input{
     to{opacity:1;transform:translateY(0);}
 }
 
+
+.info-text{
+    text-align:left;
+    font-size:17px;
+    line-height:1.6;
+    color:#333;
+}
+
+.info-text li{
+    margin:8px 0;
+}
+
+.action-card{
+    grid-column:span 2;
+}
+
 @media screen and (max-width:768px){
+    .menu-toggle{
+        top:12px;
+        left:12px;
+        width:54px;
+        height:54px;
+        border-radius:16px;
+        font-size:30px;
+    }
+
     .header{
-        padding:82px 12px 20px;
-        justify-content:center;
-        text-align:center;
+        padding:86px 14px 18px;
+        display:grid;
+        grid-template-columns:1fr auto;
+        gap:12px;
+        text-align:left;
+        align-items:center;
     }
 
     .header h1{
-        font-size:28px;
+        font-size:30px;
+        line-height:1.18;
+        margin-left:0;
     }
 
     .header-controls{
-        display:none;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+    }
+
+    #clock{
+        display:block;
+        font-size:18px;
+        line-height:1.1;
+        min-width:86px;
+        text-align:center;
+    }
+
+    .header-controls button{
+        width:76px;
+        height:48px;
+        margin:0;
+        padding:0;
+        font-size:24px;
     }
 
     .container{
@@ -307,24 +357,253 @@ select,input{
 
     .recommendation,
     .controls,
-    .chart-card{
+    .chart-card,
+    .action-card{
         grid-column:span 1;
     }
 
     .card{
         width:100%;
         padding:18px;
+        min-height:auto;
+    }
+
+    .card h2{
+        font-size:24px;
+        line-height:1.2;
+    }
+
+    .card p{
+        font-size:30px;
+    }
+
+    .sidebar{
+        width:260px;
+    }
+}
+
+@media screen and (max-width:420px){
+    .header h1{
+        font-size:27px;
+    }
+
+    #clock{
+        font-size:16px;
+        min-width:74px;
+    }
+
+    .header-controls button{
+        width:70px;
+        height:44px;
     }
 
     .card h2{
         font-size:22px;
     }
+}
 
-    .card p{
-        font-size:28px;
+
+/* ===== V4 responsive navigation + action cards ===== */
+/* Desktop / laptop: keep the left menu visible like the older website layout */
+@media screen and (min-width:769px){
+    .menu-toggle,
+    .overlay{
+        display:none !important;
     }
 
     .sidebar{
+        transform:none !important;
         width:260px;
+        padding:28px 20px 20px;
+        box-shadow:4px 0 18px rgba(0,0,0,.12);
+    }
+
+    .header{
+        margin-left:260px;
+        width:calc(100% - 260px);
+        padding:28px 30px;
+    }
+
+    .container{
+        margin-left:260px;
+        width:calc(100% - 260px);
+    }
+
+    .bottom-nav{
+        display:none !important;
+    }
+}
+
+/* Action page button cards */
+.action-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(260px,1fr));
+    gap:24px;
+    grid-column:span 2;
+}
+
+.pump-action-card{
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+}
+
+.pump-action-icon{
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    font-size:26px;
+    color:white;
+    box-shadow:0 8px 20px rgba(0,0,0,.16);
+}
+
+.start-icon{
+    background:linear-gradient(135deg,#4CAF50,#2E7D32);
+}
+
+.stop-icon{
+    background:linear-gradient(135deg,#e53935,#c62828);
+}
+
+.pump-action-card h2{
+    margin:0;
+}
+
+.action-description{
+    color:#555;
+    font-size:17px;
+    font-weight:400;
+}
+
+.action-btn{
+    width:100%;
+    padding:18px 22px;
+    margin-top:12px;
+    border-radius:14px;
+    font-size:22px;
+    font-weight:bold;
+    color:white;
+}
+
+.start-btn{
+    background:linear-gradient(135deg,#4CAF50,#2E7D32) !important;
+}
+
+.stop-btn{
+    background:linear-gradient(135deg,#e53935,#c62828) !important;
+}
+
+.pump-status-card .refresh-btn{
+    width:100%;
+    padding:16px;
+    border-radius:14px;
+    font-size:20px;
+    font-weight:bold;
+    background:linear-gradient(135deg,#42a5f5,#1565c0) !important;
+    color:white;
+}
+
+/* Android/mobile: bottom navigation like app tabs */
+.bottom-nav{
+    display:none;
+}
+
+@media screen and (max-width:768px){
+    body{
+        padding-bottom:86px;
+    }
+
+    .bottom-nav{
+        position:fixed;
+        left:12px;
+        right:12px;
+        bottom:10px;
+        height:66px;
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        align-items:center;
+        gap:2px;
+        background:rgba(255,255,255,.96);
+        border-radius:18px;
+        box-shadow:0 -2px 18px rgba(0,0,0,.14);
+        z-index:9998;
+        overflow:hidden;
+    }
+
+    .bottom-nav a{
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:3px;
+        color:#444;
+        text-decoration:none;
+        font-size:11px;
+        font-weight:600;
+        border-top:3px solid transparent;
+    }
+
+    .bottom-nav a span:first-child{
+        font-size:22px;
+        line-height:1;
+    }
+
+    .bottom-nav a.active{
+        color:#2e7d32;
+        border-top-color:#2e7d32;
+        background:rgba(46,125,50,.06);
+    }
+
+    .dark-mode .bottom-nav{
+        background:rgba(30,30,30,.96);
+    }
+
+    .dark-mode .bottom-nav a{
+        color:#ddd;
+    }
+
+    .dark-mode .bottom-nav a.active{
+        color:#81c784;
+        border-top-color:#81c784;
+        background:rgba(129,199,132,.08);
+    }
+
+    .action-buttons{
+        grid-template-columns:1fr;
+        grid-column:span 1;
+    }
+
+    .pump-action-card{
+        min-height:245px;
+    }
+
+    .action-btn{
+        font-size:20px;
+        padding:17px;
+    }
+}
+
+@media screen and (max-width:420px){
+    .bottom-nav{
+        left:8px;
+        right:8px;
+        bottom:8px;
+        height:64px;
+        border-radius:16px;
+    }
+
+    .bottom-nav a{
+        font-size:10px;
+    }
+
+    .bottom-nav a span:first-child{
+        font-size:20px;
     }
 }

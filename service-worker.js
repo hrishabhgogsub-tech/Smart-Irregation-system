@@ -1,10 +1,12 @@
-const CACHE_NAME = "smart-irrigation-v1";
+const CACHE_NAME = "smart-irrigation-v4";
 
 const urlsToCache = [
     "./",
     "./dashboard.html",
     "./analytics.html",
     "./settings.html",
+    "./action.html",
+    "./info.html",
     "./style.css",
     "./script.js",
     "./weather.js",
@@ -47,4 +49,12 @@ self.addEventListener("fetch", event => {
 
     );
 
+});
+
+self.addEventListener("activate", event => {
+    event.waitUntil(
+        caches.keys().then(keys => Promise.all(
+            keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        ))
+    );
 });

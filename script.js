@@ -165,7 +165,7 @@ if(thresholdCard){
     selectedThreshold + "%";
 }
 
-let autoMode = false;
+let autoMode = localStorage.getItem("mode") === "Auto";
 
 let lastPumpStatus = document.getElementById("pumpStatus")?.innerText || "OFF";
 
@@ -203,13 +203,62 @@ function loadHistory(){
 }
 
 function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("open");
-    document.querySelector(".overlay").classList.toggle("show");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.querySelector(".overlay");
+
+    if(sidebar){
+        sidebar.classList.toggle("open");
+    }
+
+    if(overlay){
+        overlay.classList.toggle("show");
+    }
 }
 
 function closeSidebar(){
-    document.getElementById("sidebar").classList.remove("open");
-    document.querySelector(".overlay").classList.remove("show");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.querySelector(".overlay");
+
+    if(sidebar){
+        sidebar.classList.remove("open");
+    }
+
+    if(overlay){
+        overlay.classList.remove("show");
+    }
+}
+
+function createBottomNav(){
+    if(document.querySelector(".bottom-nav")){
+        return;
+    }
+
+    const current = window.location.pathname.split("/").pop() || "dashboard.html";
+
+    const links = [
+        ["dashboard.html", "🏠", "Dashboard"],
+        ["analytics.html", "📈", "Analytics"],
+        ["action.html", "🚿", "Actions"],
+        ["info.html", "ℹ", "Info"],
+        ["settings.html", "⚙", "Settings"]
+    ];
+
+    const nav = document.createElement("nav");
+    nav.className = "bottom-nav";
+
+    links.forEach(link => {
+        const anchor = document.createElement("a");
+        anchor.href = link[0];
+
+        if(current === link[0] || (current === "" && link[0] === "dashboard.html")){
+            anchor.className = "active";
+        }
+
+        anchor.innerHTML = `<span>${link[1]}</span><span>${link[2]}</span>`;
+        nav.appendChild(anchor);
+    });
+
+    document.body.appendChild(nav);
 }
 
 let lastAnnouncement = "";
@@ -252,18 +301,20 @@ function updateAIRecommendation(){
 
 const ctx = document.getElementById('moistureChart');
 
-new Chart(ctx, {
-    type: 'line',
+if(ctx && window.Chart){
+    new Chart(ctx, {
+        type: 'line',
 
-    data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 
-        datasets: [{
-            label: 'Soil Moisture (%)',
-            data: [32, 35, 28, 40, 38, 45]
-        }]
-    }
-});
+            datasets: [{
+                label: 'Soil Moisture (%)',
+                data: [32, 35, 28, 40, 38, 45]
+            }]
+        }
+    });
+}
 
 
 
@@ -271,8 +322,12 @@ function toggleAutoMode() {
 
     autoMode = !autoMode;
 
-    document.getElementById("autoMode")
-        .innerText = autoMode ? "ON" : "OFF";
+    const autoModeElement = document.getElementById("autoMode");
+    if(autoModeElement){
+        autoModeElement.innerText = autoMode ? "ON" : "OFF";
+    }
+
+    localStorage.setItem("mode", autoMode ? "Auto" : "Manual");
 
     addHistory(
         autoMode
@@ -553,6 +608,10 @@ function showToast(message){
         "toast"
     );
 
+    if(!toast){
+        return;
+    }
+
     toast.innerText =
     message;
 
@@ -612,18 +671,21 @@ window.addEventListener(
     "load",
     () => {
 
+        createBottomNav();
+
         loadHistory();
 
-        setTimeout(() => {
+        const autoModeElement = document.getElementById("autoMode");
+        if(autoModeElement){
+            autoModeElement.innerText = autoMode ? "ON" : "OFF";
+        }
 
-            document
-            .getElementById(
-                "loader"
-            )
-            .style.display =
-            "none";
-
-        }, 2000);
+        const loader = document.getElementById("loader");
+        if(loader){
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 1200);
+        }
 
     }
 );
