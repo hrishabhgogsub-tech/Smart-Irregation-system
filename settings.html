@@ -1,90 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Settings</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="sidebar">
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<div class="overlay" onclick="closeSidebar()"></div>
 
+<div class="sidebar" id="sidebar">
     <h2>🌱 MENU</h2>
-
     <a href="dashboard.html">🏠 Dashboard</a>
-
     <a href="analytics.html">📈 Analytics</a>
-
     <a href="settings.html">⚙ Settings</a>
-
+    <a href="#">ℹ About</a>
 </div>
 
-<header>
+<header class="header">
     <h1>⚙ Irrigation Settings</h1>
 </header>
 
 <div class="container">
-
     <div class="card">
-
         <h2>🌾 Crop Type</h2>
-
         <select id="cropType">
             <option>Rice</option>
             <option>Wheat</option>
             <option>Tomato</option>
             <option>Cotton</option>
         </select>
-
     </div>
 
     <div class="card">
-
         <h2>💧 Moisture Threshold</h2>
-
-        <input type="number"
-               id="threshold"
-               value="30">
-
+        <input type="number" id="threshold" value="30">
     </div>
 
     <div class="card">
-
         <h2>📍 Location</h2>
-
-        <input type="text"
-               value="Bhopal">
-
+        <input type="text" value="Bhopal">
     </div>
 
     <div class="card">
-
         <h2>🤖 Irrigation Mode</h2>
-
         <select id="mode">
             <option>Auto</option>
             <option>Manual</option>
         </select>
-
     </div>
 
     <div class="card">
-
-        <button onclick="saveSettings()">
-            Save Settings
-        </button>
-
+        <button onclick="saveSettings()">Save Settings</button>
     </div>
-
 </div>
 
 <script src="settings.js"></script>
-
+<script>
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("open");
+    document.querySelector(".overlay").classList.toggle("show");
+}
+function closeSidebar(){
+    document.getElementById("sidebar").classList.remove("open");
+    document.querySelector(".overlay").classList.remove("show");
+}
+</script>
 </body>
 </html>

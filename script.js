@@ -54,43 +54,39 @@ function speak(text, language = "en-IN") {
 
 function startPump(){
 
-    document.getElementById(
-        "pumpStatus"
-    ).innerText = "ON";
+    document.getElementById("pumpStatus").innerText = "ON";
 
-    showToast(
-        "🚿 Pump Started"
-    );
+    addHistory("Manual Pump Started");
+
+    showToast("🚿 Pump Started");
 }
 
 function stopPump(){
 
-    document.getElementById(
-        "pumpStatus"
-    ).innerText = "OFF";
+    document.getElementById("pumpStatus").innerText = "OFF";
 
-    showToast(
-        "🛑 Pump Stopped"
-    );
+    addHistory("Manual Pump Stopped");
+
+    showToast("🛑 Pump Stopped");
 }
 
 function addHistory(message){
 
-    const list =
-    document.getElementById(
-        "historyList"
-    );
+    const list = document.getElementById("historyList");
 
-    const item =
-    document.createElement("li");
+    if(!list){
+        return;
+    }
 
-    const time =
-    new Date()
-    .toLocaleTimeString();
+    const time = new Date().toLocaleString();
+    const entry = `${time} - ${message}`;
 
-    item.innerText =
-    `${time} - ${message}`;
+    const history = JSON.parse(localStorage.getItem("irrigationHistory")) || [];
+    history.unshift(entry);
+    localStorage.setItem("irrigationHistory", JSON.stringify(history.slice(0, 20)));
 
+    const item = document.createElement("li");
+    item.innerText = entry;
     list.prepend(item);
 }
 
@@ -170,6 +166,51 @@ if(thresholdCard){
 }
 
 let autoMode = false;
+
+let lastPumpStatus = document.getElementById("pumpStatus")?.innerText || "OFF";
+
+function setPumpStatus(status, source){
+
+    const pumpStatus = document.getElementById("pumpStatus");
+
+    if(!pumpStatus){
+        return;
+    }
+
+    if(lastPumpStatus !== status){
+        addHistory(`${source} Pump ${status === "ON" ? "Started" : "Stopped"}`);
+    }
+
+    pumpStatus.innerText = status;
+    lastPumpStatus = status;
+}
+
+function loadHistory(){
+
+    const list = document.getElementById("historyList");
+    if(!list){
+        return;
+    }
+
+    list.innerHTML = "";
+    const history = JSON.parse(localStorage.getItem("irrigationHistory")) || [];
+
+    history.forEach(entry => {
+        const item = document.createElement("li");
+        item.innerText = entry;
+        list.appendChild(item);
+    });
+}
+
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("open");
+    document.querySelector(".overlay").classList.toggle("show");
+}
+
+function closeSidebar(){
+    document.getElementById("sidebar").classList.remove("open");
+    document.querySelector(".overlay").classList.remove("show");
+}
 
 let lastAnnouncement = "";
 
@@ -304,20 +345,16 @@ function runAutoMode(){
         if(
             weatherCondition === "Rain"
         ){
-            document.getElementById(
-                "pumpStatus"
-            ).innerText = "OFF";
+            setPumpStatus("OFF", "Auto");
 
             return;
         }
 
         if(moisture < threshold && rain < 50){
-            document.getElementById("pumpStatus")
-                .innerText = "ON";
+            setPumpStatus("ON", "Auto");
         }
         else{
-            document.getElementById("pumpStatus")
-                .innerText = "OFF";
+            setPumpStatus("OFF", "Auto");
         }
     }
 }
@@ -574,6 +611,8 @@ setInterval(() => {
 window.addEventListener(
     "load",
     () => {
+
+        loadHistory();
 
         setTimeout(() => {
 

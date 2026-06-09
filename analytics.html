@@ -1,48 +1,32 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Analytics</title>
-</head>
-<body>
-    <h1>Analytics Page</h1>
-</body>
-</html>
-
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4CAF50">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Analytics</title>
-
     <link rel="stylesheet" href="style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
 
-<div class="sidebar">
+<button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+<div class="overlay" onclick="closeSidebar()"></div>
 
+<div class="sidebar" id="sidebar">
     <h2>🌱 MENU</h2>
-
     <a href="dashboard.html">🏠 Dashboard</a>
-
     <a href="analytics.html">📈 Analytics</a>
-
     <a href="settings.html">⚙ Settings</a>
-
+    <a href="#">ℹ About</a>
 </div>
 
-<header>
+<header class="header">
     <h1>📈 Analytics Dashboard</h1>
 </header>
 
 <div class="container">
-
     <div class="card chart-card">
         <h2>📈 Soil Moisture Trend</h2>
         <canvas id="moistureAnalyticsChart"></canvas>
@@ -57,10 +41,18 @@
         <h2>🤖 AI Decisions</h2>
         <canvas id="decisionChart"></canvas>
     </div>
-
 </div>
 
 <script src="analytics.js"></script>
-
+<script>
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("open");
+    document.querySelector(".overlay").classList.toggle("show");
+}
+function closeSidebar(){
+    document.getElementById("sidebar").classList.remove("open");
+    document.querySelector(".overlay").classList.remove("show");
+}
+</script>
 </body>
 </html>
