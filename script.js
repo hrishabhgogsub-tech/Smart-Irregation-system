@@ -1,4 +1,6 @@
 console.log("script.js loaded");
+
+const ESP32_URL = "http://10.146.167.96";
 if(
     localStorage.getItem(
         "loggedIn"
@@ -52,22 +54,40 @@ function speak(text, language = "en-IN") {
     );
 }
 
-function startPump(){
+async function startPump(){
 
-    document.getElementById("pumpStatus").innerText = "ON";
-
-    addHistory("Manual Pump Started");
-
-    showToast("🚿 Pump Started");
+    try{
+        await fetch(`${ESP32_URL}/pump/on`);
+        localStorage.setItem("mode", "Manual");
+        autoMode = false;
+        setPumpStatus("ON", "Manual");
+        updateModeDisplay("MANUAL");
+        addHistory("Manual Pump Started");
+        showToast("🚿 Pump Started");
+        fetchESP32Data();
+    }
+    catch(error){
+        showToast("⚠ ESP32 not reachable");
+        console.log(error);
+    }
 }
 
-function stopPump(){
+async function stopPump(){
 
-    document.getElementById("pumpStatus").innerText = "OFF";
-
-    addHistory("Manual Pump Stopped");
-
-    showToast("🛑 Pump Stopped");
+    try{
+        await fetch(`${ESP32_URL}/pump/off`);
+        localStorage.setItem("mode", "Manual");
+        autoMode = false;
+        setPumpStatus("OFF", "Manual");
+        updateModeDisplay("MANUAL");
+        addHistory("Manual Pump Stopped");
+        showToast("🛑 Pump Stopped");
+        fetchESP32Data();
+    }
+    catch(error){
+        showToast("⚠ ESP32 not reachable");
+        console.log(error);
+    }
 }
 
 function addHistory(message){
@@ -228,6 +248,59 @@ function closeSidebar(){
     }
 }
 
+
+function updateModeDisplay(mode){
+    const autoModeElement = document.getElementById("autoMode");
+    if(autoModeElement){
+        autoModeElement.innerText = mode;
+    }
+}
+
+function updateLiveSoilValue(rawSoil){
+    const soilElement = document.getElementById("soilMoisture");
+    if(soilElement){
+        soilElement.innerText = rawSoil;
+    }
+
+    // Keep the local AI card roughly aligned with raw data.
+    // Dry is high on this sensor. 4095 is dry, 1100 is wet.
+    const moisturePercent = Math.max(0, Math.min(100, Math.round((4095 - Number(rawSoil)) / (4095 - 1100) * 100)));
+    moistureValue = moisturePercent;
+
+    const sliderValue = document.getElementById("sliderValue");
+    if(sliderValue){
+        sliderValue.innerText = moisturePercent + "%";
+    }
+
+    const slider = document.getElementById("moistureSlider");
+    if(slider){
+        slider.value = moisturePercent;
+    }
+}
+
+async function fetchESP32Data(){
+    try{
+        const response = await fetch(`${ESP32_URL}/data`, { cache: "no-store" });
+        const data = await response.json();
+
+        updateLiveSoilValue(data.soil);
+        setPumpStatus(data.pump, "ESP32");
+        updateModeDisplay(data.mode);
+        autoMode = data.mode === "AUTO";
+        localStorage.setItem("mode", autoMode ? "Auto" : "Manual");
+        updateAIRecommendation();
+
+        return data;
+    }
+    catch(error){
+        console.log("ESP32 offline", error);
+        const pumpElement = document.getElementById("pumpStatus");
+        if(pumpElement){
+            pumpElement.innerText = "OFFLINE";
+        }
+    }
+}
+
 function createBottomNav(){
     if(document.querySelector(".bottom-nav")){
         return;
@@ -318,24 +391,25 @@ if(ctx && window.Chart){
 
 
 
-function toggleAutoMode() {
+async function enableAutoMode(){
 
-    autoMode = !autoMode;
-
-    const autoModeElement = document.getElementById("autoMode");
-    if(autoModeElement){
-        autoModeElement.innerText = autoMode ? "ON" : "OFF";
+    try{
+        await fetch(`${ESP32_URL}/auto`);
+        autoMode = true;
+        localStorage.setItem("mode", "Auto");
+        updateModeDisplay("AUTO");
+        addHistory("Auto Mode Enabled");
+        showToast("🤖 Auto Mode Enabled");
+        fetchESP32Data();
     }
+    catch(error){
+        showToast("⚠ ESP32 not reachable");
+        console.log(error);
+    }
+}
 
-    localStorage.setItem("mode", autoMode ? "Auto" : "Manual");
-
-    addHistory(
-        autoMode
-        ? "Auto Mode Enabled"
-        : "Auto Mode Disabled"
-    );
-
-    runAutoMode();            
+function toggleAutoMode(){
+    enableAutoMode();
 }
 
 function announceDecision(
@@ -677,8 +751,11 @@ window.addEventListener(
 
         const autoModeElement = document.getElementById("autoMode");
         if(autoModeElement){
-            autoModeElement.innerText = autoMode ? "ON" : "OFF";
+            autoModeElement.innerText = autoMode ? "AUTO" : "MANUAL";
         }
+
+        fetchESP32Data();
+        setInterval(fetchESP32Data, 1000);
 
         const loader = document.getElementById("loader");
         if(loader){

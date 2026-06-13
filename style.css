@@ -610,3 +610,5 @@ select,input{
         font-size:20px;
     }
 }
+
+.live-status-card p{letter-spacing:.5px;}

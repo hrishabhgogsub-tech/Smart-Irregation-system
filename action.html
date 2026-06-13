@@ -32,14 +32,14 @@
 <div class="container">
     <div class="card">
         <h2>🤖 Auto Mode</h2>
-        <p id="autoMode">OFF</p>
-        <button class="action-btn stop-btn" onclick="toggleAutoMode()">🤖 Toggle Auto Mode</button>
+        <p id="autoMode">Loading...</p>
+        <button class="action-btn start-btn" onclick="enableAutoMode()">🤖 Enable Auto Mode</button>
     </div>
 
     <div class="card pump-status-card">
         <h2>⚙ Pump Status</h2>
         <p id="pumpStatus">OFF</p>
-        <button class="refresh-btn" onclick="showToast('✅ Status refreshed')">⚙ Refresh Status</button>
+        <button class="refresh-btn" onclick="fetchESP32Data()">⚙ Refresh Status</button>
     </div>
 
     <div class="action-buttons">
