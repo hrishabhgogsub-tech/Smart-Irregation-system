@@ -403,34 +403,37 @@ select,input{
 }
 
 
-/* ===== V4 responsive navigation + action cards ===== */
-/* Desktop / laptop: keep the left menu visible like the older website layout */
+/* ===== V5 responsive navigation + action cards ===== */
+/* Desktop / laptop: slide menu stays hidden until the menu button is clicked */
 @media screen and (min-width:769px){
-    .menu-toggle,
-    .overlay{
+    .bottom-nav{
         display:none !important;
+    }
+
+    .menu-toggle{
+        display:block;
     }
 
     .sidebar{
-        transform:none !important;
-        width:260px;
-        padding:28px 20px 20px;
-        box-shadow:4px 0 18px rgba(0,0,0,.12);
+        width:280px;
+        padding:85px 20px 20px;
+        transform:translateX(-100%);
+        box-shadow:4px 0 22px rgba(0,0,0,.25);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
     }
 
     .header{
-        margin-left:260px;
-        width:calc(100% - 260px);
-        padding:28px 30px;
+        margin-left:0;
+        width:100%;
+        padding:28px 30px 28px 90px;
     }
 
     .container{
-        margin-left:260px;
-        width:calc(100% - 260px);
-    }
-
-    .bottom-nav{
-        display:none !important;
+        margin-left:0;
+        width:100%;
     }
 }
 

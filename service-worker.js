@@ -1,4 +1,4 @@
-const CACHE_NAME = "smart-irrigation-v4";
+const CACHE_NAME = "smart-irrigation-v5";
 
 const urlsToCache = [
     "./",
